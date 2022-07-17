@@ -168,53 +168,37 @@ class HomePage extends GetView<HomePageController> {
               children: [
                 IconButton(
                   onPressed: () {
-                    controller.updateScreenIndex(0);
                     pageController.animateToPage(0,
                         duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeIn);
-                  },
-                  icon: const Icon(FontAwesomeIcons.house),
-                  color: controller.screenNumber.value == 0
-                      ? Colors.amber
-                      : Colors.white,
-                  iconSize: 25.0,
-                ),
-                IconButton(
-                  onPressed: () {
-                    controller.updateScreenIndex(1);
-                    pageController.animateToPage(1,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeIn);
+                        curve: Curves.easeInOut);
                   },
                   icon: const Icon(FontAwesomeIcons.magnifyingGlass),
-                  color: controller.screenNumber.value == 1
-                      ? Colors.amber
+                  color: controller.screenNumber.value == 0
+                      ? Colors.black
                       : Colors.white,
                   iconSize: 25.0,
                 ),
                 IconButton(
                   onPressed: () {
-                    controller.updateScreenIndex(2);
+                    pageController.animateToPage(1,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut);
+                  },
+                  icon: const Icon(FontAwesomeIcons.house),
+                  color: controller.screenNumber.value == 1
+                      ? Colors.black
+                      : Colors.white,
+                  iconSize: 40.0,
+                ),
+                IconButton(
+                  onPressed: () {
                     pageController.animateToPage(2,
                         duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeIn);
+                        curve: Curves.easeInOut);
                   },
                   icon: const Icon(FontAwesomeIcons.bell),
                   color: controller.screenNumber.value == 2
-                      ? Colors.amber
-                      : Colors.white,
-                  iconSize: 25.0,
-                ),
-                IconButton(
-                  onPressed: () {
-                    controller.updateScreenIndex(3);
-                    pageController.animateToPage(3,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeIn);
-                  },
-                  icon: const Icon(FontAwesomeIcons.envelope),
-                  color: controller.screenNumber.value == 3
-                      ? Colors.amber
+                      ? Colors.black
                       : Colors.white,
                   iconSize: 25.0,
                 ),
