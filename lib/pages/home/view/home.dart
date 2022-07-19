@@ -11,7 +11,6 @@ class HomePage extends GetView<HomePageController> {
 
   @override
   Widget build(BuildContext context) {
-    var pageController = PageController();
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -93,7 +92,10 @@ class HomePage extends GetView<HomePageController> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        print("clicked");
+                        Get.back();
+                        controller.pageController.animateToPage(0,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOut);
                       },
                       style: ElevatedButton.styleFrom(
                           primary: Colors.transparent,
@@ -153,66 +155,77 @@ class HomePage extends GetView<HomePageController> {
             ),
           ),
         ),
-        bottomNavigationBar: Container(
-          height: 80.0,
-          decoration: const BoxDecoration(
-            color: Colors.teal,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30.0),
-              topRight: Radius.circular(30.0),
-            ),
-          ),
-          child: Obx(
-            () => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    pageController.animateToPage(0,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut);
-                  },
-                  icon: const Icon(FontAwesomeIcons.magnifyingGlass),
-                  color: controller.screenNumber.value == 0
-                      ? Colors.black
-                      : Colors.white,
-                  iconSize: 25.0,
-                ),
-                IconButton(
-                  onPressed: () {
-                    pageController.animateToPage(1,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut);
-                  },
-                  icon: const Icon(FontAwesomeIcons.house),
-                  color: controller.screenNumber.value == 1
-                      ? Colors.black
-                      : Colors.white,
-                  iconSize: 40.0,
-                ),
-                IconButton(
-                  onPressed: () {
-                    pageController.animateToPage(2,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut);
-                  },
-                  icon: const Icon(FontAwesomeIcons.bell),
-                  color: controller.screenNumber.value == 2
-                      ? Colors.black
-                      : Colors.white,
-                  iconSize: 25.0,
-                ),
-              ],
-            ),
-          ),
-        ),
         backgroundColor: homeBackgroundColor,
-        body: PageView(
-          controller: pageController,
-          onPageChanged: (val) {
-            controller.updateScreenIndex(val);
-          },
-          children: controller.screenList,
+        body: Stack(
+          children: [
+            Theme(
+              data: ThemeData(
+                  colorScheme: ColorScheme.fromSwatch(accentColor: cardColor)),
+              child: PageView(
+                controller: controller.pageController,
+                onPageChanged: (val) {
+                  controller.updateScreenIndex(val);
+                },
+                children: controller.screenList,
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 80.0,
+                decoration: const BoxDecoration(
+                  color: Colors.teal,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                ),
+                child: Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          controller.pageController.animateToPage(0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut);
+                        },
+                        icon: const Icon(FontAwesomeIcons.magnifyingGlass),
+                        color: controller.screenNumber.value == 0
+                            ? Colors.black
+                            : Colors.white,
+                        iconSize: 25.0,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          controller.pageController.animateToPage(1,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut);
+                        },
+                        icon: const Icon(FontAwesomeIcons.house),
+                        color: controller.screenNumber.value == 1
+                            ? Colors.black
+                            : Colors.white,
+                        iconSize: 40.0,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          controller.pageController.animateToPage(2,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut);
+                        },
+                        icon: const Icon(FontAwesomeIcons.bell),
+                        color: controller.screenNumber.value == 2
+                            ? Colors.black
+                            : Colors.white,
+                        iconSize: 25.0,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
