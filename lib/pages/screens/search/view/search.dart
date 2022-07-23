@@ -57,7 +57,9 @@ class SearchPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: 20.0,
                       ),
-                      decoration: InputDecoration(border: InputBorder.none)),
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Search contacts...")),
                 ),
               ),
             ),

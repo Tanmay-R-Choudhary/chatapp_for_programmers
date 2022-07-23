@@ -1,4 +1,6 @@
 import 'package:app/pages/home/controller/home_controller.dart';
+import 'package:app/pages/profile/binding/profile_binding.dart';
+import 'package:app/pages/profile/view/profile.dart';
 import 'package:app/utils/authentication_service_controller.dart';
 import 'package:app/utils/constanst.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,9 @@ class HomePage extends GetView<HomePageController> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        print("clicked");
+                        Get.back();
+                        Get.to(() => const ProfilePage(),
+                            binding: ProfileBinding());
                       },
                       style: ElevatedButton.styleFrom(
                           primary: Colors.transparent,
