@@ -218,7 +218,7 @@ class HomePage extends GetView<HomePageController> {
                               duration: const Duration(milliseconds: 500),
                               curve: Curves.easeInOut);
                         },
-                        icon: const Icon(FontAwesomeIcons.bell),
+                        icon: const Icon(FontAwesomeIcons.earthAmericas),
                         color: controller.screenNumber.value == 2
                             ? Colors.black
                             : Colors.white,
